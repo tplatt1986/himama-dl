@@ -9,6 +9,7 @@ import (
 	"io/fs"
 	"net/http"
 	"os"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"regexp"
@@ -97,7 +98,7 @@ func spawnDownloadWorkers(child himama.Child, work <-chan himama.Activity) {
 		wg.Add(1)
 		go func(activity himama.Activity) {
 			defer wg.Done()
-			filename := filterWindowsFilename(activity.SuggestedLocalFilename())
+			filename := strings.Replace(activity.SuggestedLocalFilename(), "/", "-", -1)
 
 			dest := "./" + child.Name + "/" + filename
 			if !fileExists(dest) {
