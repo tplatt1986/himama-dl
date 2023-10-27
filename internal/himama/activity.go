@@ -33,7 +33,7 @@ func (a *Activity) SuggestedLocalFilename() string {
 	nameParts := []string{
 		date,
 		sanitizeFilenameComponent(a.AddedBy),
-		sanitizeFilenameComponent(a.Title),
+//		sanitizeFilenameComponent(a.Title),
 		hashStr[0:8],
 	}
 
